@@ -1,0 +1,14 @@
+Nºcampingsconentradas:2 camping/s con entradas
+Dni:00000000
+Camping:Riverlandcamping
+Concierto:Riverland
+Email:jaime@hotmail.com
+Tienda:Tienda grande
+Extras:No hay extras
+Nºcampingsconentradas:2 camping/s con entradas
+Dni:00000000
+Camping:Riverlandcamping
+Concierto:Riverland
+Email:jaime@hotmail.com
+Tienda:Tienda grande
+Extras:No hay extras
