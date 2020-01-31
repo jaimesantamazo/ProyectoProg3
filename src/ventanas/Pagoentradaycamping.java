@@ -422,14 +422,16 @@ public class Pagoentradaycamping {
 				}
 				if(chckbxComedor.isSelected()) {
 					extras = extras+"Acesso al comedor. ";
-				}else{
-					extras = "No hay extras";
-					
 				}
+				if(!chckbxColchones.isSelected()&&!chckbxAccesoADuchas.isSelected()&&!chckbxComedor.isSelected()) {
+					extras = "No hay extras";
+				}
+					
+				
 				textField_12.setText(extras);
 			
 				String[] opciones = {"SI", "NO"};
-				String confirmacion = "¿Estas seguro de que quieres comprar un abono del concierto: "+textField.getText()+" y con el camping: "+textField_6.getText()+" con la tienda: "+tipotienda+" y los extras: "+extras;
+				String confirmacion = "¿Estas seguro de que quieres comprar un abono del concierto: "+textField.getText()+" y con el camping: "+textField_6.getText()+" con la tienda: "+textField_13.getText()+" y los extras: "+textField_12.getText();
 				int respuesta = JOptionPane.showOptionDialog( null, confirmacion, "¿Estas seguro?", JOptionPane.YES_NO_CANCEL_OPTION,
 						JOptionPane.QUESTION_MESSAGE, null, opciones, opciones[0]);
 				switch (respuesta) {

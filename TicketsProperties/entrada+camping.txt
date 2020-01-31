@@ -12,3 +12,17 @@ Concierto:Riverland
 Email:jaime@hotmail.com
 Tienda:Tienda grande
 Extras:No hay extras
+Nºcampingsconentradas:2 entrada/as con camping
+Dni:89898989
+Camping:Riverland
+Concierto:Riverland
+Email:jaime@hotmail.com
+Tienda:Tienda pequeña
+Extras:Colchones, 
+Nºcampingsconentradas:2 entrada/as con camping
+Dni:89898989
+Camping:Riverland
+Concierto:Riverland
+Email:jaime@hotmail.com
+Tienda:Tienda pequeña
+Extras:Colchones, 

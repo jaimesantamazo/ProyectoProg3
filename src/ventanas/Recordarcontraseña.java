@@ -92,23 +92,37 @@ public class Recordarcontraseña {
 		JButton btnNewButton_1 = new JButton("Recordar");
 		btnNewButton_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Conexion conexion5 = new Conexion();
-				Connection cn5 = conexion5.conectar();
-				String contraseña;
-				String username;
-				username = textField.getText();
-				String sql = "select contraseña from usuario where username = ?";
-				try{
-					PreparedStatement sentencia = cn5.prepareStatement(sql);
-					sentencia.setString(1, username);
-					ResultSet rs = sentencia.executeQuery();
-					contraseña = rs.getString(1);
-					textField_1.setText(contraseña);
-				}catch(SQLException e4) {
-					e4.printStackTrace();
-				}
+				if(!textField.getText().isEmpty()) {
+					Conexion conexion5 = new Conexion();
+					Connection cn5 = conexion5.conectar();
+					String contraseña;
+					String username;
+					username = textField.getText();
+					String sql = "select contraseña from usuario where username = ?";
+					try{
+						PreparedStatement sentencia = cn5.prepareStatement(sql);
+						sentencia.setString(1, username);
+						ResultSet rs = sentencia.executeQuery();
+						contraseña = rs.getString(1);
+						textField_1.setText(contraseña);
+					}catch(SQLException e4) {
+						JOptionPane.showConfirmDialog(null, "El usuario no es valido","ERROR",JOptionPane.ERROR_MESSAGE);
+					}
+					String[] opciones = {"SI", "NO"};
+					String confirmacion = "Tu contraseña de la cuenta es: "+textField_1.getText()+", ¿Quieres ver los datos de tu cuenta o cambiar alguno de ellos?";
+					int respuesta = JOptionPane.showOptionDialog( null, confirmacion, "¿Estas seguro?", JOptionPane.YES_NO_CANCEL_OPTION,
+							JOptionPane.QUESTION_MESSAGE, null, opciones, opciones[0]);
+					switch(respuesta) {
+					case 0:
+						frame.dispose();
+						new Updateperfil();
+						break;
+					case 1:
+						break;
+					}
+				}else
+					JOptionPane.showMessageDialog(null, "No has introducido un usuario correcto o el campo esta nulo","ERROR",JOptionPane.ERROR_MESSAGE);
 				
-				JOptionPane.showMessageDialog(null, "Tu contraseña de la cuenta es: "+textField_1.getText());
 			}
 		});
 		btnNewButton_1.setBounds(373, 264, 115, 29);

@@ -1,6 +1,7 @@
 package gestionBD;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.sql.Statement;
 
 import javax.swing.JOptionPane;
 
@@ -9,6 +10,7 @@ import java.sql.Connection;
 public class Conexion {
 	
 	private Connection conn = null;
+	private static Exception lastError = null; 
 	
 	public Connection conectar() {
 		try {
@@ -20,6 +22,15 @@ public class Conexion {
 			e.printStackTrace();
 		}
 		return conn;
+	}
+	public static void cerrarBD( Connection con, Statement st ) {
+		try {
+			if (st!=null) st.close();
+			if (con!=null) con.close();
+		} catch (SQLException e) {
+			lastError = e;
+			e.printStackTrace();
+		}
 	}
 
 }

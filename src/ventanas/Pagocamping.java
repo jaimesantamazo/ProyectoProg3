@@ -352,15 +352,10 @@ public class Pagocamping {
 				aforo = textField_4.getText();
 				nombre = textField_3.getText();
 				int numero1 = Integer.parseInt(aforo);
-				String dni;
-				String camping;
 				String email;
 				String tipotienda = "";
 				String extras = "";
 				String valor1;
-				
-				dni = textField_8.getText();
-				camping = textField_3.getText();
 				email = textField_5.getText();
 				valor1 = textField.getText();
 				int valor = Integer.parseInt(valor1);
@@ -390,7 +385,7 @@ public class Pagocamping {
 				}
 				textField_2.setText(extras);
 				String[] opciones = {"Comprar camping solo", "Comprar ticket en conjunto con la entrada","Cancelar la operacion"};
-				String confirmacion = "¿Estas seguro de que quieres comprar una plaza de camping de "+textField_3.getText()+" con los siguientes extras: "+extras+" y con la tienda: "+tipotienda+" en vez de comprar una ticket conjunto con la entrada?";
+				String confirmacion = "¿Estas seguro de que quieres comprar una plaza de camping de "+textField_3.getText()+" con los siguientes extras: "+textField_2.getText()+" y con la tienda: "+textField_9.getText()+" en vez de comprar una ticket conjunto con la entrada?";
 				int respuesta = JOptionPane.showOptionDialog( null, confirmacion, "¿Estas seguro?", JOptionPane.YES_NO_CANCEL_OPTION,
 						JOptionPane.QUESTION_MESSAGE, null, opciones, opciones[0]);
 				switch(respuesta) {
