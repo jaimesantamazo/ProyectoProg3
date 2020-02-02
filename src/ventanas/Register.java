@@ -46,7 +46,7 @@ public class Register {
 	private JTextField textField_4;
 	private JPasswordField passwordField;
 	static PrintStream log;
-	HashMap<String, String> usuarios = new HashMap<String, String>();
+	HashMap<String, Integer> usuarios = new HashMap<String, Integer>();
 	private static final String EMAIL_PATTER = 
 		    "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@"
 		    + "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$";
@@ -181,7 +181,11 @@ public class Register {
 						if(n>0) {
 							JOptionPane.showMessageDialog(null, "Usuario registrado");
 							Login.log.log(Level.FINER,"Usuario registrado: "+username);
-							usuarios.put(textField.getText(),String.valueOf(passwordField.getPassword()));
+							if(!usuarios.containsKey(username)) {
+								usuarios.put(username, 1);
+							}else {
+								Login.log.log(Level.FINER,"No se ha registrado el usuario en el hashmap");
+							}
 							frame1.dispose();
 							new Login();
 						}

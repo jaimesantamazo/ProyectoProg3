@@ -198,7 +198,7 @@ public class Pagoentradaycamping {
 						textField_1.setText(st.nextToken().toString());
 					}
 					}catch(Exception e5) {
-						JOptionPane.showMessageDialog(null, "Cargar los conciertos primero","ERROR",JOptionPane.ERROR_MESSAGE);
+						JOptionPane.showMessageDialog(null, "Cargar los conciertos y campings primero","ERROR",JOptionPane.ERROR_MESSAGE);
 					}
 				try {
 					StringTokenizer st1 = new StringTokenizer(comboBox_1.getSelectedItem().toString());
@@ -375,6 +375,7 @@ public class Pagoentradaycamping {
 		JButton btnPagar = new JButton("Pagar");
 		btnPagar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				try {
 				String nombre;
 				String cantidadentradas;
 				String numentradas;
@@ -448,6 +449,16 @@ public class Pagoentradaycamping {
 						JOptionPane.showMessageDialog(null, "No hay entradas suficientes","ERROR",JOptionPane.ERROR_MESSAGE);
 					}else if(numero2<valor) {
 						JOptionPane.showMessageDialog(null, "No hay plazas de camping suficientes","ERROR",JOptionPane.ERROR_MESSAGE);
+					}else if(textField_8.getText().isEmpty()) {
+						JOptionPane.showMessageDialog(null, "Rellena todos los huecos","ERROR",JOptionPane.ERROR_MESSAGE);
+					}else if(textField_2.getText().isEmpty()) {
+						JOptionPane.showMessageDialog(null, "Rellena todos los huecos","ERROR",JOptionPane.ERROR_MESSAGE);
+					}else if(textField_3.getText().isEmpty()) {
+						JOptionPane.showMessageDialog(null, "Rellena todos los huecos","ERROR",JOptionPane.ERROR_MESSAGE);
+					}else if(textField_4.getText().isEmpty()) {
+						JOptionPane.showMessageDialog(null, "Rellena todos los huecos","ERROR",JOptionPane.ERROR_MESSAGE);
+					}else if(textField_5.getText().isEmpty()) {
+						JOptionPane.showMessageDialog(null, "Rellena todos los huecos","ERROR",JOptionPane.ERROR_MESSAGE);
 					}else {
 						if(numero1>0 && numero2>0) {
 						comprarentradassql2();
@@ -464,6 +475,11 @@ public class Pagoentradaycamping {
 				default:
 					break;
 				}
+			}catch(NullPointerException e10) {
+				JOptionPane.showMessageDialog(null, "Rellena todos los campos para completar el pago","ERROR",JOptionPane.ERROR_MESSAGE);
+			}catch(NumberFormatException e20) {
+				JOptionPane.showMessageDialog(null, "Rellena los huecos con valores validos","ERROR",JOptionPane.ERROR_MESSAGE);
+			}
 			}
 			});
 		btnPagar.setBounds(188, 540, 115, 29);
@@ -532,6 +548,7 @@ public class Pagoentradaycamping {
 		}
 	}
 	public void comprarcampingsql2() {
+		try {
 		Conexion conexion5 = new Conexion();
 		Connection cn5 = conexion5.conectar();
 		String nombre1;
@@ -561,10 +578,12 @@ public class Pagoentradaycamping {
 		}catch (SQLException e1) {
 			e1.printStackTrace();
 		}
-		
+		}catch(NumberFormatException e20) {
+			JOptionPane.showMessageDialog(null, "Rellena los huecos con valores validos","ERROR",JOptionPane.ERROR_MESSAGE);
+		}
 	}
 public void comprarentradasycamping(int x) {
-		
+		try {
 		String valor1;
 		valor1 =  textField_8.getText();
 		int valor = Integer.parseInt(valor1);
@@ -625,8 +644,8 @@ public void comprarentradasycamping(int x) {
 					x++;
 					comprarentradasycamping(x);
 				}
+		}catch(NumberFormatException e20) {
+			JOptionPane.showMessageDialog(null, "Rellena los huecos con valores validos","ERROR",JOptionPane.ERROR_MESSAGE);
 		}
-	
-	
-	
+		}
 }
