@@ -36,14 +36,13 @@ import java.util.logging.Level;
 import java.awt.event.ActionEvent;
 import javax.swing.JPasswordField;
 
-public class Updateperfil {
+public class Updateeventos {
 
 	public JFrame frame1;
 	private JTextField textField;
 	private JTextField textField_2;
 	private JTextField textField_3;
 	private JTextField textField_4;
-	private JPasswordField passwordField;
 	static PrintStream log;
 	private static final String EMAIL_PATTER = 
 		    "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@"
@@ -52,6 +51,8 @@ public class Updateperfil {
 	private JButton btnCambiarApellido;
 	private JButton btnCambiarApellido_1;
 	private JButton btnCambiarContrasea;
+	private JTextField textField_1;
+	private JTextField textField_5;
 
 	/**
 	 * Launch the application.
@@ -60,7 +61,7 @@ public class Updateperfil {
 		SwingUtilities.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					Updateperfil window = new Updateperfil();
+					Updateeventos window = new Updateeventos();
 					window.frame1.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -72,7 +73,7 @@ public class Updateperfil {
 	/**
 	 * Create the application.
 	 */
-	public Updateperfil() {
+	public Updateeventos() {
 		super();
 		initialize();
 		frame1.setVisible(true);
@@ -83,19 +84,19 @@ public class Updateperfil {
 	 */
 	private void initialize() {
 		frame1 = new JFrame();
-		frame1.setBounds(100, 100, 580, 552);
+		frame1.setBounds(100, 100, 580, 588);
 		frame1.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame1.getContentPane().setLayout(null);
 		
-		JLabel lblNewLabel = new JLabel("Username:\r\n");
+		JLabel lblNewLabel = new JLabel("Codigo:\r\n");
 		lblNewLabel.setBounds(46, 97, 87, 20);
 		frame1.getContentPane().add(lblNewLabel);
 		
-		JLabel lblNewLabel_1 = new JLabel("Apellido 1:");
+		JLabel lblNewLabel_1 = new JLabel("Precio:");
 		lblNewLabel_1.setBounds(46, 224, 87, 20);
 		frame1.getContentPane().add(lblNewLabel_1);
 		
-		JLabel lblNewLabel_2 = new JLabel("Apellido 2:");
+		JLabel lblNewLabel_2 = new JLabel("Fecha ini:");
 		lblNewLabel_2.setBounds(46, 283, 135, 20);
 		frame1.getContentPane().add(lblNewLabel_2);
 		
@@ -107,98 +108,118 @@ public class Updateperfil {
 			public void actionPerformed(ActionEvent arg0) {
 				Conexion conexion = new Conexion();
 				Connection cn = conexion.conectar();
-				String username;
-				String contraseña;
+				String fecha_ini;
+				String fecha_fin;
 				String nombre;
-				String apellido_1;
-				String apellido_2;
+				String precio;
+				String cantidad;
+				String codigo;
 				String sql = "";
 				
-				username = textField.getText();
-				contraseña = String.valueOf(passwordField.getPassword());
+				codigo = textField.getText();
+				cantidad = textField_1.getText();
+				fecha_fin = textField_5.getText();
 				nombre = textField_4.getText();
-				apellido_1 = textField_2.getText();
-				apellido_2 = textField_3.getText();
+				precio = textField_2.getText();
+				fecha_ini = textField_3.getText();
 				
 				if(textField_4.isEditable()==true) {
-					sql = "update usuario set nombre = ? where username = ?";
+					sql = "update entradas set nombre = ? where codigo = ?";
 					try {
 						PreparedStatement pst = cn.prepareStatement(sql);
 						pst.setString(1, nombre);
-						pst.setString(2, username);
+						pst.setString(2, codigo);
 						int n = pst.executeUpdate();
 						if(n>0) {
 						Conexion.cerrarBD(cn, pst);
-							JOptionPane.showMessageDialog(null, "Datos de usuario cambiado");
-							Login.log.log(Level.FINER,"Datos de usuario cambiados (nombre): "+username);
+							JOptionPane.showMessageDialog(null, "Datos de un evento cambiado");
+							Login.log.log(Level.FINER,"Datos de evento cambiados (nombre): "+codigo);
 							frame1.dispose();
-							new Login();
+							new Gestion();
 						}
 					} catch (SQLException e) {
 						e.printStackTrace();
 						JOptionPane.showMessageDialog(null, "Los datos no son validos " +e.getMessage(),"ERROR", JOptionPane.ERROR_MESSAGE);
 					}
 				}else if(textField_2.isEditable()==true) {
-					sql = "update usuario set apellido_1 = ? where username = ?";
+					sql = "update entradas set precio = ? where codigo = ?";
 					try {
 						PreparedStatement pst = cn.prepareStatement(sql);
-						pst.setString(1, apellido_1);
-						pst.setString(2, username);
+						pst.setString(1, precio);
+						pst.setString(2, codigo);
 						int n1 = pst.executeUpdate();
 						if(n1>0) {
 						Conexion.cerrarBD(cn, pst);
-							JOptionPane.showMessageDialog(null, "Datos de usuario cambiado");
-							Login.log.log(Level.FINER,"Datos de usuario cambiados (apellido 1): "+username);
+							JOptionPane.showMessageDialog(null, "Datos de un evento cambiado");
+							Login.log.log(Level.FINER,"Datos de evento cambiados (apellido 1): "+codigo);
 							frame1.dispose();
-							new Login();
+							new Gestion();
 						}
 					} catch (SQLException e) {
 						e.printStackTrace();
 						JOptionPane.showMessageDialog(null, "Los datos no son validos " +e.getMessage(),"ERROR", JOptionPane.ERROR_MESSAGE);
 					}
 				}else if(textField_3.isEditable()==true) {
-					sql = "update usuario set apellido_2 = ? where username = ?";
+					sql = "update entradas set fecha_ini = ? where codigo = ?";
 					try {
 						PreparedStatement pst = cn.prepareStatement(sql);
-						pst.setString(1, apellido_2);
-						pst.setString(2, username);
+						pst.setString(1, fecha_ini);
+						pst.setString(2, codigo);
 						int n2 = pst.executeUpdate();
 						if(n2>0) {
 						Conexion.cerrarBD(cn, pst);
-							JOptionPane.showMessageDialog(null, "Datos de usuario cambiado");
-							Login.log.log(Level.FINER,"Datos de usuario cambiados (apellido 2): "+username);
+							JOptionPane.showMessageDialog(null, "Datos de un evento cambiado");
+							Login.log.log(Level.FINER,"Datos de evento cambiados (apellido 2): "+codigo);
 							frame1.dispose();
-							new Login();
+							new Gestion();
 						}
 					} catch (SQLException e) {
 						e.printStackTrace();
 						JOptionPane.showMessageDialog(null, "Los datos no son validos " +e.getMessage(),"ERROR", JOptionPane.ERROR_MESSAGE);
 					}
-				}else if(passwordField.isEditable()==true){
-					sql = "update usuario set contraseña = ? where username = ?";
+				}else if(textField_5.isEditable()==true){
+					sql = "update entradas set fecha_fin = ? where codigo = ?";
 					try {
 						PreparedStatement pst = cn.prepareStatement(sql);
-						pst.setString(1, contraseña);
-						pst.setString(2, username);
+						pst.setString(1, fecha_fin);
+						pst.setString(2, codigo);
 						int n3 = pst.executeUpdate();
 						if(n3>0) {
 						Conexion.cerrarBD(cn, pst);
-							JOptionPane.showMessageDialog(null, "Datos de usuario cambiado");
-							Login.log.log(Level.FINER,"Datos de usuario cambiados (contraseña): "+username);
+							JOptionPane.showMessageDialog(null, "Datos de un evento cambiado");
+							Login.log.log(Level.FINER,"Datos de evento cambiados (contraseña): "+codigo);
 							frame1.dispose();
-							new Login();
+							new Gestion();
 						}
 					} catch (SQLException e) {
 						e.printStackTrace();
 						JOptionPane.showMessageDialog(null, "Los datos no son validos " +e.getMessage(),"ERROR", JOptionPane.ERROR_MESSAGE);
 					}
-				}else if(textField_4.isEditable()==true&&textField_2.isEditable()==true&&textField_3.isEditable()==true&&passwordField.isEditable()==true) {
+				}else if(textField_1.isEditable()==true) {
+					sql = "update entradas set cantidad = ? where codigo = ?";
+					try {
+						PreparedStatement pst = cn.prepareStatement(sql);
+						pst.setString(1, cantidad);
+						pst.setString(2, codigo);
+						int n3 = pst.executeUpdate();
+						if(n3>0) {
+						Conexion.cerrarBD(cn, pst);
+							JOptionPane.showMessageDialog(null, "Datos de un evento cambiado");
+							Login.log.log(Level.FINER,"Datos de evento cambiados (contraseña): "+codigo);
+							frame1.dispose();
+							new Gestion();
+						}
+					} catch (SQLException e) {
+						e.printStackTrace();
+						JOptionPane.showMessageDialog(null, "Los datos no son validos " +e.getMessage(),"ERROR", JOptionPane.ERROR_MESSAGE);
+					}
+				}else if(textField_4.isEditable()==true&&textField_2.isEditable()==true&&textField_3.isEditable()==true&&textField_5.isEditable()==true&&textField_1.isEditable()==true) {
 					JOptionPane.showMessageDialog(null, "No has cambiado ningun valor","ERROR",JOptionPane.ERROR_MESSAGE);
 				}
 			
 			}});
 		btnNewButton_1.setForeground(Color.BLACK);
-		btnNewButton_1.setBounds(390, 449, 140, 29);
+		btnNewButton_1.setBounds(395, 486, 140, 29);
 		frame1.getContentPane().add(btnNewButton_1);
 		
 		textField = new JTextField();
@@ -214,7 +235,7 @@ public class Updateperfil {
 
 			public void keyTyped(KeyEvent e){
 				char c= e.getKeyChar();
-				if (!Character.isAlphabetic(c))
+				if (!Character.isDigit(c))
 
 			     e.consume();
 
@@ -232,30 +253,13 @@ public class Updateperfil {
 		textField_3.setBounds(164, 280, 146, 26);
 		frame1.getContentPane().add(textField_3);
 		textField_3.setColumns(10);
-		textField_3.addKeyListener(new KeyListener(){
-
-			public void keyTyped(KeyEvent e){
-				char c= e.getKeyChar();
-				if (!Character.isAlphabetic(c))
-
-			     e.consume();
-
-			}
-
-			public void keyPressed(KeyEvent arg0) {
-			}
-
-			public void keyReleased(KeyEvent arg0) {
-			}
-			});
-		
 		
 		JLabel lblIntroduceTusDatos = new JLabel("Introduce tu usuario para obtener tus datos");
 		lblIntroduceTusDatos.setFont(new Font("Tahoma", Font.BOLD, 16));
 		lblIntroduceTusDatos.setBounds(15, 16, 398, 52);
 		frame1.getContentPane().add(lblIntroduceTusDatos);
 		
-		JButton btnVueltaAlLogin = new JButton("Vuelta al login");
+		JButton btnVueltaAlLogin = new JButton("Vuelta a la gestion");
 		btnVueltaAlLogin.setActionCommand("Open1");
 		btnVueltaAlLogin.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -264,11 +268,11 @@ public class Updateperfil {
 		        if(cmd1.equals("Open1"))
 		        {
 		            frame1.dispose();
-		            new Login();
+		            new Gestion();
 		        }
 			}
 		});
-		btnVueltaAlLogin.setBounds(15, 449, 146, 31);
+		btnVueltaAlLogin.setBounds(15, 485, 166, 31);
 		frame1.getContentPane().add(btnVueltaAlLogin);
 		
 		JLabel lblNombre = new JLabel("Nombre:");
@@ -296,67 +300,100 @@ public class Updateperfil {
 			}
 			});
 		
-		JLabel lblContrasea = new JLabel("Contrase\u00F1a:");
+		JLabel lblContrasea = new JLabel("Fecha fin:\r\n");
 		lblContrasea.setBounds(46, 346, 103, 20);
 		frame1.getContentPane().add(lblContrasea);
 		
-		passwordField = new JPasswordField();
-		passwordField.setBounds(164, 343, 146, 26);
-		frame1.getContentPane().add(passwordField);
-		
-		JButton btnCargarDatosDe = new JButton("Cargar datos de perfil");
+		JButton btnCargarDatosDe = new JButton("Cargar datos del concierto");
 		btnCargarDatosDe.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				if(textField.getText().isEmpty()) {
-					JOptionPane.showMessageDialog(null, "El usuario no es valdio o es nulo","ERROR",JOptionPane.ERROR_MESSAGE);
+					JOptionPane.showMessageDialog(null, "El codigo no es valdio o es nulo","ERROR",JOptionPane.ERROR_MESSAGE);
 				}else {
 					Conexion conexion = new Conexion();
 					Connection cn = conexion.conectar();
-					String username;
-					username = textField.getText();
+					String codigo;
+					codigo = textField.getText();
 					btnCargarDatosDe.setVisible(false);
-					String sql = "select nombre,apellido_1,apellido_2,contraseña from usuario where username = ?";
+					String sql = "select nombre,precio,fecha_ini,fecha_fin,cantidad from entradas where codigo = ?";
 					try{
 						PreparedStatement sentencia = cn.prepareStatement(sql);
-						sentencia.setString(1, username);
+						sentencia.setString(1, codigo);
 						ResultSet rs = sentencia.executeQuery();
 						textField_4.setText(rs.getString(1));
 						textField_2.setText(rs.getString(2));
 						textField_3.setText(rs.getString(3));
-						passwordField.setText(rs.getString(4));
+						textField_5.setText(rs.getString(4));
+						textField_1.setText(rs.getString(5));
+						
 						textField.setEditable(false);
 						textField_2.setEditable(false);
 						textField_3.setEditable(false);
 						textField_4.setEditable(false);
-						passwordField.setEditable(false);
+						textField_5.setEditable(false);
+						textField_1.setEditable(false);
 						Conexion.cerrarBD(cn, sentencia);
 						
 					}catch(SQLException e4) {
-						JOptionPane.showMessageDialog(null, "El usuario no es valido","ERROR",JOptionPane.ERROR_MESSAGE);
+						JOptionPane.showMessageDialog(null, "El codigo no es valido","ERROR",JOptionPane.ERROR_MESSAGE);
 						textField.setEditable(false);
 					}
 					
 				}
 			}
 		});
-		btnCargarDatosDe.setBounds(325, 93, 210, 29);
+		btnCargarDatosDe.setBounds(325, 93, 218, 29);
 		frame1.getContentPane().add(btnCargarDatosDe);
 		
-		JButton btnCambiarApellido = new JButton("Cambiar apellido 1");
+		JButton btnCambiarApellido = new JButton("Cambiar precio");
 		btnCambiarApellido.setBounds(348, 220, 182, 29);
 		frame1.getContentPane().add(btnCambiarApellido);
 		
-		JButton btnCambiarApellido_1 = new JButton("Cambiar apellido 2");
+		JButton btnCambiarApellido_1 = new JButton("Cambiar fecha ini");
 		btnCambiarApellido_1.setBounds(348, 279, 182, 29);
 		frame1.getContentPane().add(btnCambiarApellido_1);
 		
-		JButton btnCambiarContrasea = new JButton("Cambiar contrase\u00F1a");
+		JButton btnCambiarContrasea = new JButton("Cambiar fecha fin");
 		btnCambiarContrasea.setBounds(348, 342, 182, 29);
 		frame1.getContentPane().add(btnCambiarContrasea);
 		
 		JButton btnCambiarNombre = new JButton("Cambiar nombre");
 		btnCambiarNombre.setBounds(348, 162, 182, 29);
 		frame1.getContentPane().add(btnCambiarNombre);
+		
+		JButton btnNewButton = new JButton("Cambiar cantidad");
+		btnNewButton.setBounds(348, 399, 182, 29);
+		frame1.getContentPane().add(btnNewButton);
+		
+		JLabel lblCantidad = new JLabel("Cantidad:");
+		lblCantidad.setBounds(46, 403, 69, 20);
+		frame1.getContentPane().add(lblCantidad);
+		
+		textField_1 = new JTextField();
+		textField_1.setBounds(164, 400, 146, 26);
+		frame1.getContentPane().add(textField_1);
+		textField_1.setColumns(10);
+		textField_1.addKeyListener(new KeyListener(){
+
+			public void keyTyped(KeyEvent e){
+				char c= e.getKeyChar();
+				if (!Character.isDigit(c))
+
+			     e.consume();
+
+			}
+
+			public void keyPressed(KeyEvent arg0) {
+			}
+
+			public void keyReleased(KeyEvent arg0) {
+			}
+			});
+		
+		textField_5 = new JTextField();
+		textField_5.setBounds(164, 343, 146, 26);
+		frame1.getContentPane().add(textField_5);
+		textField_5.setColumns(10);
 		btnCambiarNombre.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				textField_4.setEditable(true);
@@ -364,6 +401,8 @@ public class Updateperfil {
 				btnCambiarApellido.setVisible(false);
 				btnCambiarApellido_1.setVisible(false);
 				btnCambiarContrasea.setVisible(false);
+				btnNewButton.setVisible(false);
+				
 			}
 		});
 		btnCambiarApellido.addActionListener(new ActionListener() {
@@ -373,6 +412,7 @@ public class Updateperfil {
 				btnCambiarApellido.setVisible(false);
 				btnCambiarApellido_1.setVisible(false);
 				btnCambiarContrasea.setVisible(false);
+				btnNewButton.setVisible(false);
 			}
 		});
 		btnCambiarApellido_1.addActionListener(new ActionListener() {
@@ -382,15 +422,27 @@ public class Updateperfil {
 				btnCambiarApellido.setVisible(false);
 				btnCambiarApellido_1.setVisible(false);
 				btnCambiarContrasea.setVisible(false);
+				btnNewButton.setVisible(false);
 			}
 		});
 		btnCambiarContrasea.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				passwordField.setEditable(true);
+				textField_5.setEditable(true);
 				btnCambiarNombre.setVisible(false);
 				btnCambiarApellido.setVisible(false);
 				btnCambiarApellido_1.setVisible(false);
 				btnCambiarContrasea.setVisible(false);
+				btnNewButton.setVisible(false);
+			}
+		});
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				textField_1.setEditable(true);
+				btnCambiarNombre.setVisible(false);
+				btnCambiarApellido.setVisible(false);
+				btnCambiarApellido_1.setVisible(false);
+				btnCambiarContrasea.setVisible(false);
+				btnNewButton.setVisible(false);
 			}
 		});
 	}

@@ -92,6 +92,7 @@ public class Recordarusuario {
 		JButton btnNewButton_1 = new JButton("Recordar");
 		btnNewButton_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				if(!textField.getText().isEmpty()) {
 				Conexion conexion5 = new Conexion();
 				Connection cn5 = conexion5.conectar();
 				String email;
@@ -107,10 +108,21 @@ public class Recordarusuario {
 				}catch(SQLException e4) {
 					JOptionPane.showConfirmDialog(null, "El email no es valido","ERROR",JOptionPane.ERROR_MESSAGE);
 				}
-				
-				JOptionPane.showMessageDialog(null, "Tu nombre de usuario es: "+textField_1.getText());
-			}
-		});
+				String[] opciones = {"SI", "NO"};
+				String confirmacion = "Tu usuario de la cuenta es: "+textField_1.getText()+", ¿Quieres ver los datos de tu cuenta o cambiar alguno de ellos?";
+				int respuesta = JOptionPane.showOptionDialog( null, confirmacion, "¿Estas seguro?", JOptionPane.YES_NO_CANCEL_OPTION,
+						JOptionPane.QUESTION_MESSAGE, null, opciones, opciones[0]);
+				switch(respuesta) {
+				case 0:
+					frame.dispose();
+					new Updateperfil();
+					break;
+				case 1:
+					break;
+				}
+			}else
+				JOptionPane.showMessageDialog(null, "No has introducido un email correcto o el campo esta nulo","ERROR",JOptionPane.ERROR_MESSAGE);
+			}});
 		btnNewButton_1.setBounds(373, 264, 115, 29);
 		frame.getContentPane().add(btnNewButton_1);
 		

@@ -180,6 +180,22 @@ public class Login {
 		});
 		lblRecordarContrasea.setBounds(204, 212, 144, 20);
 		frame.getContentPane().add(lblRecordarContrasea);
+		
+		JButton btnEditarPrefil = new JButton("Editar prefil");
+		btnEditarPrefil.setActionCommand("Open4000");
+		btnEditarPrefil.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				String cmd = e.getActionCommand();
+
+		        if(cmd.equals("Open4000"))
+		        {
+		            frame.dispose();
+		            new Updateperfil();
+			}
+			}
+		});
+		btnEditarPrefil.setBounds(395, 298, 115, 29);
+		frame.getContentPane().add(btnEditarPrefil);
 	}
 
 	protected void ingresar() {

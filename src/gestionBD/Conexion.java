@@ -23,10 +23,10 @@ public class Conexion {
 		}
 		return conn;
 	}
-	public static void cerrarBD( Connection con, Statement st ) {
+	public static void cerrarBD( Connection conn, Statement st ) {
 		try {
 			if (st!=null) st.close();
-			if (con!=null) con.close();
+			if (conn!=null) conn.close();
 		} catch (SQLException e) {
 			lastError = e;
 			e.printStackTrace();

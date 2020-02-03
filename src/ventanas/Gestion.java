@@ -40,8 +40,8 @@ public class Gestion {
 	private JTextField textField_2;
 	private JTextField textField_5;
 	ArrayList<String> conciertos = new ArrayList<String>();
-	private JDateChooser calendar;
-	private JDateChooser calendar2;
+	private JTextField textField_3;
+	private JTextField textField_4;
 
 	/**
 	 * Launch the application.
@@ -73,7 +73,7 @@ public class Gestion {
 	 */
 	private void initialize() {
 		frame = new JFrame();
-		frame.setBounds(100, 100, 899, 597);
+		frame.setBounds(100, 100, 899, 637);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		
@@ -86,16 +86,8 @@ public class Gestion {
 		JList<String> list = new JList<String>(listmodel);
 		list.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
 		list.setFixedCellWidth(10);
-		list.setBounds(322, 79, 540, 446);
+		list.setBounds(322, 79, 540, 486);
 		frame.getContentPane().add(list);
-		
-		calendar = new JDateChooser("yyyy/MM/dd","####/##/##",'_');
-		calendar.setBounds(114,273,145,29);
-		frame.getContentPane().add(calendar);
-		
-		calendar2 = new JDateChooser("yyyy/MM/dd","####/##/##",'_');
-		calendar2.setBounds(114,330,145,29);
-		frame.getContentPane().add(calendar2);
 		
 		JButton btnAadirEvento = new JButton("A\u00F1adir evento");
 		btnAadirEvento.addActionListener(new ActionListener() {
@@ -113,8 +105,8 @@ public class Gestion {
 				codigo = textField.getText();
 				nombre = textField_1.getText();
 				precio = textField_2.getText();
-				fecha_ini = calendar.getDate().toString();
-				fecha_fin = calendar2.getDate().toString();
+				fecha_ini = textField_3.getText();
+				fecha_fin = textField_4.getText();
 				cantidad = textField_5.getText();
 				sql1 = "INSERT INTO entradas (codigo, nombre, precio, fecha_ini, fecha_fin, cantidad) VALUES(?,?,?,?,?,?)";
 		
@@ -141,8 +133,8 @@ public class Gestion {
 							
 							JOptionPane.showMessageDialog(null, "Evento registrado");
 							conciertos.add(textField_1.getText());
-							if(!textField.getText().isEmpty() && !textField_1.getText().isEmpty() && !textField_2.getText().isEmpty() && !calendar.getDate().toString().isEmpty() && !calendar2.getDate().toString().isEmpty() && !textField_5.getText().isEmpty()) {
-								listmodel.addElement("cod:"+textField.getText()+","+"nom:"+textField_1.getText()+" ,"+"precio:"+textField_2.getText()+" ,"+"f.ini:"+calendar.getDate().toString()+" ,"+"f.fin:"+calendar2.getDate().toString()+" ,"+"cant:"+textField_5.getText());
+							if(!textField.getText().isEmpty() && !textField_1.getText().isEmpty() && !textField_2.getText().isEmpty() && !textField_3.getText().isEmpty() && !textField_4.getText().isEmpty() && !textField_5.getText().isEmpty()) {
+								listmodel.addElement("cod:"+textField.getText()+","+"nom:"+textField_1.getText()+" ,"+"precio:"+textField_2.getText()+" ,"+"f.ini:"+textField_3.getText()+" ,"+"f.fin:"+textField_4.getText()+" ,"+"cant:"+textField_5.getText());
 							}
 							Login.log.log(Level.FINER,"Añadiendo eventos: " + nombre);
 						}
@@ -175,8 +167,8 @@ public class Gestion {
 				codigo = textField.getText();
 				nombre = textField_1.getText();
 				precio = textField_2.getText();
-				fecha_ini = calendar.getDate().toString();
-				fecha_fin = calendar2.getDate().toString();
+				fecha_ini = textField_3.getText();
+				fecha_fin = textField_4.getText();
 				cantidad = textField_5.getText();
 	
 				sql2 = "delete from entradas where codigo = ? and nombre = ? and precio = ? and fecha_ini = ? and fecha_fin = ? and cantidad = ?";
@@ -335,7 +327,7 @@ public class Gestion {
 			        }
 			}
 		});
-		btnVueltaAlPago.setBounds(13, 502, 120, 29);
+		btnVueltaAlPago.setBounds(13, 536, 120, 29);
 		frame.getContentPane().add(btnVueltaAlPago);
 		
 		Conexion conexion4 = new Conexion();
@@ -344,6 +336,7 @@ public class Gestion {
 		JButton btnCargarDatos = new JButton("Cargar conciertos");
 		btnCargarDatos.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				listmodel.clear();
 				String query = "SELECT CODIGO,NOMBRE,PRECIO,FECHA_INI,FECHA_FIN,CANTIDAD FROM ENTRADAS";
 				try {
 					java.sql.Statement stmt = cn4.createStatement();
@@ -358,12 +351,38 @@ public class Gestion {
 				}
 			}
 		});
-		btnCargarDatos.setBounds(163, 502, 144, 29);
+		btnCargarDatos.setBounds(163, 536, 144, 29);
 		frame.getContentPane().add(btnCargarDatos);
 		
 		JLabel lblParaEliminarLos = new JLabel("Para eliminar los conciertos, ademas\r\n de marcarlo en la lista, tienes que \r\nescribir sus datos en los campos pertinentes");
 		lblParaEliminarLos.setFont(new Font("Tahoma", Font.PLAIN, 11));
 		lblParaEliminarLos.setBounds(312, 12, 565, 54);
 		frame.getContentPane().add(lblParaEliminarLos);
+		
+		textField_3 = new JTextField();
+		textField_3.setBounds(109, 270, 169, 26);
+		frame.getContentPane().add(textField_3);
+		textField_3.setColumns(10);
+		
+		textField_4 = new JTextField();
+		textField_4.setBounds(109, 327, 169, 26);
+		frame.getContentPane().add(textField_4);
+		textField_4.setColumns(10);
+		
+		JButton btnEditarLosEventos = new JButton("Editar los eventos");
+		btnEditarLosEventos.setActionCommand("Open3000");
+		btnEditarLosEventos.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				String cmd = e.getActionCommand();
+				 if(cmd.equals("Open3000"))
+			        {
+			            frame.dispose();
+			            new Updateeventos();
+			            
+			        }
+			}
+		});
+		btnEditarLosEventos.setBounds(73, 492, 157, 29);
+		frame.getContentPane().add(btnEditarLosEventos);
 	}
 }

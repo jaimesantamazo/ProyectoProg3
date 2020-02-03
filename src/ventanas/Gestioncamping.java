@@ -37,8 +37,8 @@ public class Gestioncamping {
 	private JTextField textField_2;
 	private JTextField textField_5;
 	ArrayList<String> campings = new ArrayList<String>();
-	private JDateChooser calendar;
-	private JDateChooser calendar2;
+	private JTextField textField_3;
+	private JTextField textField_4;
 
 	
 
@@ -72,7 +72,7 @@ public class Gestioncamping {
 	 */
 	private void initialize() {
 		frame = new JFrame();
-		frame.setBounds(100, 100, 899, 632);
+		frame.setBounds(100, 100, 899, 652);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		
@@ -85,16 +85,8 @@ public class Gestioncamping {
 		JList<String> list = new JList<String>(listmodel);
 		list.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
 		list.setFixedCellWidth(10);
-		list.setBounds(15, 90, 528, 455);
+		list.setBounds(15, 90, 528, 490);
 		frame.getContentPane().add(list);
-		
-		calendar = new JDateChooser("yyyy/MM/dd","####/##/##",'_');
-		calendar.setBounds(642,260,145,29);
-		frame.getContentPane().add(calendar);
-		
-		calendar2 = new JDateChooser("yyyy/MM/dd","####/##/##",'_');
-		calendar2.setBounds(642,305,145,29);
-		frame.getContentPane().add(calendar2);
 		
 		JButton btnAadirEvento = new JButton("A\u00F1adir zona camping");
 		btnAadirEvento.addActionListener(new ActionListener() {
@@ -112,8 +104,8 @@ public class Gestioncamping {
 				codigo = textField.getText();
 				nombre1 = textField_1.getText();
 				precio = textField_2.getText();
-				fecha_ini = calendar.getDate().toString();
-				fecha_fin = calendar2.getDate().toString();
+				fecha_ini = textField_3.getText();
+				fecha_fin = textField_4.getText();
 				aforo = textField_5.getText();
 				sql1 = "INSERT INTO camping (codigo, nombre1, precio, fecha_ini, fecha_fin, aforo) VALUES(?,?,?,?,?,?)";
 		
@@ -140,8 +132,8 @@ public class Gestioncamping {
 							
 							JOptionPane.showMessageDialog(null, "Camping registrado");
 							campings.add(textField_1.getText());
-							if(!textField.getText().isEmpty() && !textField_1.getText().isEmpty() && !textField_2.getText().isEmpty() && !calendar.getDate().toString().isEmpty() && !calendar2.getDate().toString().isEmpty() && !textField_5.getText().isEmpty()) {
-								listmodel.addElement("cod:"+textField.getText()+","+"nom:"+textField_1.getText()+" ,"+"precio:"+textField_2.getText()+" ,"+"f.ini:"+calendar.getDate().toString()+" ,"+"f.fin:"+calendar2.getDate().toString()+" ,"+"aforo:"+textField_5.getText());
+							if(!textField.getText().isEmpty() && !textField_1.getText().isEmpty() && !textField_2.getText().isEmpty() && !textField_3.getText().isEmpty() && !textField_4.getText().isEmpty() && !textField_5.getText().isEmpty()) {
+								listmodel.addElement("cod:"+textField.getText()+","+"nom:"+textField_1.getText()+" ,"+"precio:"+textField_2.getText()+" ,"+"f.ini:"+textField_3.getText()+" ,"+"f.fin:"+textField_4.getText()+" ,"+"aforo:"+textField_5.getText());
 							}
 							Login.log.log(Level.FINER,"Añadiendo camping: " + nombre1);
 						}
@@ -155,7 +147,7 @@ public class Gestioncamping {
 				
 			}
 		});
-		btnAadirEvento.setBounds(599, 424, 225, 29);
+		btnAadirEvento.setBounds(599, 411, 225, 29);
 		frame.getContentPane().add(btnAadirEvento);
 		
 		JButton btnEliminarEvento = new JButton("Eliminar zona camping");
@@ -174,8 +166,8 @@ public class Gestioncamping {
 				codigo = textField.getText();
 				nombre1 = textField_1.getText();
 				precio = textField_2.getText();
-				fecha_ini = calendar.getDate().toString();
-				fecha_fin = calendar2.getDate().toString();
+				fecha_ini = textField_3.getText();
+				fecha_fin = textField_3.getText();
 				aforo = textField_5.getText();
 	
 				sql2 = "delete from camping where codigo = ? and nombre1 = ? and precio = ? and fecha_ini = ? and fecha_fin = ? and aforo = ?";
@@ -205,7 +197,7 @@ public class Gestioncamping {
 				}
 			}
 		});
-		btnEliminarEvento.setBounds(599, 469, 225, 29);
+		btnEliminarEvento.setBounds(599, 456, 225, 29);
 		frame.getContentPane().add(btnEliminarEvento);
 		
 		JLabel lblCodigo = new JLabel("Codigo:");
@@ -229,7 +221,7 @@ public class Gestioncamping {
 		frame.getContentPane().add(lblFechafin);
 		
 		JLabel lblCantidad = new JLabel("Aforo:");
-		lblCantidad.setBounds(558, 377, 69, 20);
+		lblCantidad.setBounds(558, 363, 69, 20);
 		frame.getContentPane().add(lblCantidad);
 		
 		textField = new JTextField();
@@ -296,7 +288,7 @@ public class Gestioncamping {
 			});
 		
 		textField_5 = new JTextField();
-		textField_5.setBounds(632, 374, 230, 26);
+		textField_5.setBounds(632, 360, 230, 26);
 		frame.getContentPane().add(textField_5);
 		textField_5.setColumns(10);
 		textField_5.addKeyListener(new KeyListener(){
@@ -333,7 +325,7 @@ public class Gestioncamping {
 			        }
 			}
 		});
-		btnVueltaAlPago.setBounds(559, 531, 133, 29);
+		btnVueltaAlPago.setBounds(559, 551, 133, 29);
 		frame.getContentPane().add(btnVueltaAlPago);
 		
 		Conexion conexion4 = new Conexion();
@@ -342,6 +334,7 @@ public class Gestioncamping {
 		JButton btnCargarDatos = new JButton("Cargar campings");
 		btnCargarDatos.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				listmodel.clear();
 				String query = "SELECT CODIGO,NOMBRE1,PRECIO,FECHA_INI,FECHA_FIN,AFORO FROM CAMPING";
 				try {
 					java.sql.Statement stmt = cn4.createStatement();
@@ -356,12 +349,38 @@ public class Gestioncamping {
 				}
 			}
 		});
-		btnCargarDatos.setBounds(707, 531, 155, 29);
+		btnCargarDatos.setBounds(707, 551, 155, 29);
 		frame.getContentPane().add(btnCargarDatos);
 		
 		JLabel lblParaEliminarLos = new JLabel("Para eliminar los campings, ademas\r\n de marcarlo en la lista, tienes que \r\nescribir sus datos en los campos pertinentes");
 		lblParaEliminarLos.setFont(new Font("Tahoma", Font.PLAIN, 11));
 		lblParaEliminarLos.setBounds(15, 12, 565, 54);
 		frame.getContentPane().add(lblParaEliminarLos);
+		
+		textField_3 = new JTextField();
+		textField_3.setBounds(642, 257, 169, 26);
+		frame.getContentPane().add(textField_3);
+		textField_3.setColumns(10);
+		
+		textField_4 = new JTextField();
+		textField_4.setBounds(642, 302, 169, 26);
+		frame.getContentPane().add(textField_4);
+		textField_4.setColumns(10);
+		
+		JButton btnNewButton = new JButton("Editar zona camping");
+		btnNewButton.setActionCommand("Open30000");
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				String cmd = e.getActionCommand();
+				 if(cmd.equals("Open30000"))
+			        {
+			            frame.dispose();
+			            new Updatecampings();
+			            
+			        }
+			}
+		});
+		btnNewButton.setBounds(599, 501, 225, 29);
+		frame.getContentPane().add(btnNewButton);
 	}
 }

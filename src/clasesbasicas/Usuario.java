@@ -86,5 +86,11 @@ public class Usuario {
 	public void setadmin(String admin) {
 		this.admin = admin;
 	}
+	public boolean isadmin() {
+		if(admin == "1") {
+			return true;
+		}else
+			return false;
+	}
 	
 }

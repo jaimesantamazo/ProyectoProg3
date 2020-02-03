@@ -26,3 +26,17 @@ Concierto:Riverland
 Email:jaime@hotmail.com
 Tienda:Tienda pequeña
 Extras:Colchones, 
+Nºcampingsconentradas:2 entrada/as con camping
+Dni:11111111
+Camping:arenalsound
+Concierto:arenalsound
+Email:jaime@hotmail.com
+Tienda:Tienda grande
+Extras:Colchones, 
+Nºcampingsconentradas:2 entrada/as con camping
+Dni:11111111
+Camping:arenalsound
+Concierto:arenalsound
+Email:jaime@hotmail.com
+Tienda:Tienda grande
+Extras:Colchones, 
