@@ -3,7 +3,9 @@ import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JList;
 import javax.swing.JOptionPane;
+import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 import javax.swing.JEditorPane;
 import javax.swing.JTextField;
@@ -11,6 +13,7 @@ import javax.swing.JFormattedTextField;
 import java.awt.Font;
 import javax.swing.SwingConstants;
 import javax.swing.SwingUtilities;
+import javax.swing.border.BevelBorder;
 
 import com.toedter.calendar.JCalendar;
 import com.toedter.calendar.JDateChooser;
@@ -25,6 +28,8 @@ import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.io.FileOutputStream;
 import java.io.PrintStream;
 import java.sql.*;
@@ -84,9 +89,16 @@ public class Updateeventos {
 	 */
 	private void initialize() {
 		frame1 = new JFrame();
-		frame1.setBounds(100, 100, 580, 588);
+		frame1.setBounds(100, 100, 795, 557);
 		frame1.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame1.getContentPane().setLayout(null);
+		
+		DefaultListModel<String> listmodel = new DefaultListModel<String>();
+		JList<String> list = new JList<String>(listmodel);
+		list.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
+		list.setFixedCellWidth(10);
+		list.setBounds(558, 79, 188, 351);
+		frame1.getContentPane().add(list);
 		
 		JLabel lblNewLabel = new JLabel("Codigo:\r\n");
 		lblNewLabel.setBounds(46, 97, 87, 20);
@@ -219,7 +231,7 @@ public class Updateeventos {
 			
 			}});
 		btnNewButton_1.setForeground(Color.BLACK);
-		btnNewButton_1.setBounds(395, 486, 140, 29);
+		btnNewButton_1.setBounds(370, 453, 140, 29);
 		frame1.getContentPane().add(btnNewButton_1);
 		
 		textField = new JTextField();
@@ -272,7 +284,7 @@ public class Updateeventos {
 		        }
 			}
 		});
-		btnVueltaAlLogin.setBounds(15, 485, 166, 31);
+		btnVueltaAlLogin.setBounds(15, 452, 166, 31);
 		frame1.getContentPane().add(btnVueltaAlLogin);
 		
 		JLabel lblNombre = new JLabel("Nombre:");
@@ -368,6 +380,27 @@ public class Updateeventos {
 		JLabel lblCantidad = new JLabel("Cantidad:");
 		lblCantidad.setBounds(46, 403, 69, 20);
 		frame1.getContentPane().add(lblCantidad);
+		
+		frame1.addWindowListener(new WindowAdapter() {
+
+			@Override
+			public void windowOpened(WindowEvent e) {
+				listmodel.clear();
+				String query = "SELECT CODIGO,NOMBRE FROM ENTRADAS";
+				try {
+					java.sql.Statement stmt = cn4.createStatement();
+					ResultSet rs = stmt.executeQuery(query);
+				while(rs.next())
+				{
+					listmodel.addElement("cod:"+rs.getString(1)+" ,"+"nom:"+rs.getString(2));
+				}
+					rs.close();
+				} catch (SQLException e1) {
+					e1.printStackTrace();
+				}
+			}
+			
+		});
 		
 		textField_1 = new JTextField();
 		textField_1.setBounds(164, 400, 146, 26);

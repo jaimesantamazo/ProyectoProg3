@@ -1,0 +1,12 @@
+Nºcampings:2 camping/s
+Dni:11111111
+Camping:riverlandcamping
+Email:jaime@hotmail.com
+Tienda:Tienda grande
+Extras:Colchones, Acesso al comedor. 
+Nºcampings:2 camping/s
+Dni:11111111
+Camping:riverlandcamping
+Email:jaime@hotmail.com
+Tienda:Tienda grande
+Extras:Colchones, Acesso al comedor. 

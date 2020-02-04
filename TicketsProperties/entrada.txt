@@ -1,12 +1,8 @@
-Nºentradas:1 entradas
-Dni:00001111
-Concierto:Riverland
+Nºentradas:2 entrada/as
+Dni:11111111
+Concierto:riverland
 Email:jaime@hotmail.com
 Nºentradas:2 entrada/as
-Dni:65464564
-Concierto:Riverland
-Email:jaime@hotmail.com
-Nºentradas:2 entrada/as
-Dni:65464564
-Concierto:Riverland
+Dni:11111111
+Concierto:riverland
 Email:jaime@hotmail.com

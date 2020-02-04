@@ -1,42 +1,14 @@
-Nºcampingsconentradas:2 camping/s con entradas
-Dni:00000000
-Camping:Riverlandcamping
-Concierto:Riverland
-Email:jaime@hotmail.com
-Tienda:Tienda grande
-Extras:No hay extras
-Nºcampingsconentradas:2 camping/s con entradas
-Dni:00000000
-Camping:Riverlandcamping
-Concierto:Riverland
-Email:jaime@hotmail.com
-Tienda:Tienda grande
-Extras:No hay extras
-Nºcampingsconentradas:2 entrada/as con camping
-Dni:89898989
-Camping:Riverland
-Concierto:Riverland
-Email:jaime@hotmail.com
-Tienda:Tienda pequeña
-Extras:Colchones, 
-Nºcampingsconentradas:2 entrada/as con camping
-Dni:89898989
-Camping:Riverland
-Concierto:Riverland
-Email:jaime@hotmail.com
-Tienda:Tienda pequeña
-Extras:Colchones, 
 Nºcampingsconentradas:2 entrada/as con camping
 Dni:11111111
-Camping:arenalsound
-Concierto:arenalsound
+Camping:riverlandcamping
+Concierto:riverland
 Email:jaime@hotmail.com
-Tienda:Tienda grande
-Extras:Colchones, 
+Tienda:Tienda pequeña
+Extras:Acesso a las duchas, 
 Nºcampingsconentradas:2 entrada/as con camping
 Dni:11111111
-Camping:arenalsound
-Concierto:arenalsound
+Camping:riverlandcamping
+Concierto:riverland
 Email:jaime@hotmail.com
-Tienda:Tienda grande
-Extras:Colchones, 
+Tienda:Tienda pequeña
+Extras:Acesso a las duchas, 

@@ -167,7 +167,7 @@ public class Gestioncamping {
 				nombre1 = textField_1.getText();
 				precio = textField_2.getText();
 				fecha_ini = textField_3.getText();
-				fecha_fin = textField_3.getText();
+				fecha_fin = textField_4.getText();
 				aforo = textField_5.getText();
 	
 				sql2 = "delete from camping where codigo = ? and nombre1 = ? and precio = ? and fecha_ini = ? and fecha_fin = ? and aforo = ?";

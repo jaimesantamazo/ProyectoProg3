@@ -141,12 +141,12 @@ public class Updateperfil {
 				}else if(textField_2.isEditable()==true) {
 					sql = "update usuario set apellido_1 = ? where username = ?";
 					try {
-						PreparedStatement pst = cn.prepareStatement(sql);
-						pst.setString(1, apellido_1);
-						pst.setString(2, username);
-						int n1 = pst.executeUpdate();
+						PreparedStatement pst1 = cn.prepareStatement(sql);
+						pst1.setString(1, apellido_1);
+						pst1.setString(2, username);
+						int n1 = pst1.executeUpdate();
 						if(n1>0) {
-						Conexion.cerrarBD(cn, pst);
+						Conexion.cerrarBD(cn, pst1);
 							JOptionPane.showMessageDialog(null, "Datos de usuario cambiado");
 							Login.log.log(Level.FINER,"Datos de usuario cambiados (apellido 1): "+username);
 							frame1.dispose();
@@ -159,12 +159,12 @@ public class Updateperfil {
 				}else if(textField_3.isEditable()==true) {
 					sql = "update usuario set apellido_2 = ? where username = ?";
 					try {
-						PreparedStatement pst = cn.prepareStatement(sql);
-						pst.setString(1, apellido_2);
-						pst.setString(2, username);
-						int n2 = pst.executeUpdate();
+						PreparedStatement pst2 = cn.prepareStatement(sql);
+						pst2.setString(1, apellido_2);
+						pst2.setString(2, username);
+						int n2 = pst2.executeUpdate();
 						if(n2>0) {
-						Conexion.cerrarBD(cn, pst);
+						Conexion.cerrarBD(cn, pst2);
 							JOptionPane.showMessageDialog(null, "Datos de usuario cambiado");
 							Login.log.log(Level.FINER,"Datos de usuario cambiados (apellido 2): "+username);
 							frame1.dispose();
@@ -177,12 +177,12 @@ public class Updateperfil {
 				}else if(passwordField.isEditable()==true){
 					sql = "update usuario set contraseña = ? where username = ?";
 					try {
-						PreparedStatement pst = cn.prepareStatement(sql);
-						pst.setString(1, contraseña);
-						pst.setString(2, username);
-						int n3 = pst.executeUpdate();
+						PreparedStatement pst3 = cn.prepareStatement(sql);
+						pst3.setString(1, contraseña);
+						pst3.setString(2, username);
+						int n3 = pst3.executeUpdate();
 						if(n3>0) {
-						Conexion.cerrarBD(cn, pst);
+						Conexion.cerrarBD(cn, pst3);
 							JOptionPane.showMessageDialog(null, "Datos de usuario cambiado");
 							Login.log.log(Level.FINER,"Datos de usuario cambiados (contraseña): "+username);
 							frame1.dispose();
