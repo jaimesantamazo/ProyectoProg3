@@ -12,10 +12,10 @@ public class testadministrador {
 	Administrador a2 = new Administrador();
 	
 	@Test
-	public void testcontraseña() {
-		a1.setContraseña("hola");
-		a2.setContraseña("hola");
-		assertEquals(a1.getContraseña(), a2.getContraseña());
+	public void testcontraseÅ„a() {
+		a1.setContraseÅ„a("hola");
+		a2.setContraseÅ„a("hola");
+		assertEquals(a1.getContraseÅ„a(), a2.getContraseÅ„a());
 	}
 	@Test
 	public void testusuario() {
