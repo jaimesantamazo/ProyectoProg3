@@ -91,6 +91,10 @@ public class Gestioncamping {
 		JButton btnAadirEvento = new JButton("A\u00F1adir zona camping");
 		btnAadirEvento.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				añadircamping(listmodel);
+			}
+
+			private void añadircamping(DefaultListModel<String> listmodel) {
 				Conexion conexion1 = new Conexion();
 				Connection cn1 = conexion1.conectar();
 				String codigo;
@@ -137,14 +141,12 @@ public class Gestioncamping {
 							}
 							Login.log.log(Level.FINER,"Añadiendo camping: " + nombre1);
 						}
-						
 					} catch (SQLException e) {
 						e.printStackTrace();
 						JOptionPane.showMessageDialog(null, "Los datos no son validos"+e.getMessage(), "ERROR", JOptionPane.ERROR_MESSAGE);
+						Login.log.log(Level.FINER,"Error al meter los datos");
 					}
 				}
-				
-				
 			}
 		});
 		btnAadirEvento.setBounds(599, 411, 225, 29);
@@ -153,6 +155,10 @@ public class Gestioncamping {
 		JButton btnEliminarEvento = new JButton("Eliminar zona camping");
 		btnEliminarEvento.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				eliminarcamping(listmodel, list);
+			}
+
+			private void eliminarcamping(DefaultListModel<String> listmodel, JList<String> list) {
 				Conexion conexion2 = new Conexion();
 				Connection cn2 = conexion2.conectar();
 				String codigo;
@@ -190,10 +196,10 @@ public class Gestioncamping {
 						}
 						Login.log.log(Level.FINER,"Eliminar camping: " + nombre1);
 					}
-					
 				} catch (SQLException e) {
 					e.printStackTrace();
 					JOptionPane.showMessageDialog(null, "No has podido eliminar el camping"+e.getMessage(),"ERROR",JOptionPane.ERROR_MESSAGE);
+					Login.log.log(Level.FINER,"Error al eliminar los datos");
 				}
 			}
 		});
@@ -335,6 +341,10 @@ public class Gestioncamping {
 		btnCargarDatos.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				listmodel.clear();
+				cargarcamping(listmodel, cn4);
+			}
+
+			private void cargarcamping(DefaultListModel<String> listmodel, Connection cn4) {
 				String query = "SELECT CODIGO,NOMBRE1,PRECIO,FECHA_INI,FECHA_FIN,AFORO FROM CAMPING";
 				try {
 					java.sql.Statement stmt = cn4.createStatement();
@@ -346,6 +356,7 @@ public class Gestioncamping {
 					rs.close();
 				} catch (SQLException e1) {
 					e1.printStackTrace();
+					Login.log.log(Level.FINER,"Error al cargar los datos");
 				}
 			}
 		});

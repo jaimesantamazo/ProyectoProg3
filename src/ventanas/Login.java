@@ -39,7 +39,7 @@ public class Login {
 	private JFrame frame;
 	private JTextField textFielduser;
 	private JPasswordField passwordFielduser;
-	static Logger log;
+	public static Logger log;
 
 	/**
 	 * Launch the application.
@@ -217,6 +217,7 @@ public class Login {
 			
 		}else{
 			JOptionPane.showMessageDialog(frame, "Datos no validos", "error", JOptionPane.ERROR_MESSAGE);
+			Login.log.log(Level.FINER,"Datos no validos");
 		}
 		
 	}

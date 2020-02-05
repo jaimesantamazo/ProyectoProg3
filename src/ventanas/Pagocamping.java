@@ -137,6 +137,7 @@ public class Pagocamping {
 					}
 					}catch(Exception e5) {
 						JOptionPane.showMessageDialog(null, "Cargar los campings primero","ERROR",JOptionPane.ERROR_MESSAGE);
+						Login.log.log(Level.FINER,"Error al cargar los campings");
 					}
 			}
 		});
@@ -146,6 +147,10 @@ public class Pagocamping {
 		JButton btnCargarCampings = new JButton("Cargar campings");
 		btnCargarCampings.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				cargarcamping(comboBox);
+			}
+
+			private void cargarcamping(JComboBox comboBox) {
 				Conexion conexion3 = new Conexion();
 				Connection cn3 = conexion3.conectar();
 				String query = "SELECT NOMBRE1,AFORO FROM CAMPING";
@@ -160,6 +165,7 @@ public class Pagocamping {
 					rs.close();
 				} catch (SQLException e1) {
 					e1.printStackTrace();
+					Login.log.log(Level.FINER,"Error al cargar los datos");
 				}
 			}
 		});
@@ -431,8 +437,10 @@ public class Pagocamping {
 				}
 				}catch(NullPointerException e10) {
 					JOptionPane.showMessageDialog(null, "Rellena todos los campos para completar el pago","ERROR",JOptionPane.ERROR_MESSAGE);
+					Login.log.log(Level.FINER,"Error al realizar la compra");
 				}catch(NumberFormatException e20) {
 					JOptionPane.showMessageDialog(null, "Rellena los huecos con valores validos","ERROR",JOptionPane.ERROR_MESSAGE);
+					Login.log.log(Level.FINER,"Error al realizar la compra");
 				}
 			}
 		});
@@ -483,9 +491,11 @@ public class Pagocamping {
 			}
 		}catch (SQLException e1) {
 			e1.printStackTrace();
+			Login.log.log(Level.FINER,"Error en el update camping");
 		}
 		}catch(NumberFormatException e20) {
 			JOptionPane.showMessageDialog(null, "Rellena los huecos con valores validos","ERROR",JOptionPane.ERROR_MESSAGE);
+			Login.log.log(Level.FINER,"Error en el update camping");
 		}
 	}
 	public void comprarcamping(int x) {
@@ -527,6 +537,7 @@ public class Pagocamping {
 					Login.log.log(Level.FINER,"Fichero creado de camping: "+camping );
 				}catch(IOException e6) {
 					e6.printStackTrace();
+					Login.log.log(Level.FINER,"Error en el creador de ficheros camping");
 				}
 				try{
 					FileWriter archivo = new FileWriter("C:\\Users\\jaime\\eclipse-workspace\\proyecto program 3\\Tickets\\Camping\\camping"+dni+".txt", true);
@@ -540,6 +551,7 @@ public class Pagocamping {
 					Login.log.log(Level.FINER,"Fichero creado de camping: "+camping );
 				}catch(IOException e6) {
 					e6.printStackTrace();
+					Login.log.log(Level.FINER,"Error en el creador de ficheros camping");
 				}
 				try{
 					FileWriter archivo = new FileWriter("C:\\Users\\jaime\\eclipse-workspace\\proyecto program 3\\TicketsProperties\\camping.txt", true);
@@ -553,12 +565,14 @@ public class Pagocamping {
 					Login.log.log(Level.FINER,"Fichero creado de camping: "+camping );
 				}catch(IOException e6) {
 					e6.printStackTrace();
+					Login.log.log(Level.FINER,"Error en el creador de ficheros camping");
 				}
 			x++;
 			comprarcamping(x);
 		}
 		}catch(NumberFormatException e20) {
 			JOptionPane.showMessageDialog(null, "Rellena los huecos con valores validos","ERROR",JOptionPane.ERROR_MESSAGE);
+			Login.log.log(Level.FINER,"Error en el formato del numero");
 		}
 	}
 }

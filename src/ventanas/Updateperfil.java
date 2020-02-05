@@ -137,6 +137,7 @@ public class Updateperfil {
 					} catch (SQLException e) {
 						e.printStackTrace();
 						JOptionPane.showMessageDialog(null, "Los datos no son validos " +e.getMessage(),"ERROR", JOptionPane.ERROR_MESSAGE);
+						Login.log.log(Level.FINER,"Datos no validos (nombre)");
 					}
 				}else if(textField_2.isEditable()==true) {
 					sql = "update usuario set apellido_1 = ? where username = ?";
@@ -155,6 +156,7 @@ public class Updateperfil {
 					} catch (SQLException e) {
 						e.printStackTrace();
 						JOptionPane.showMessageDialog(null, "Los datos no son validos " +e.getMessage(),"ERROR", JOptionPane.ERROR_MESSAGE);
+						Login.log.log(Level.FINER,"Datos no validos (apellido_1)");
 					}
 				}else if(textField_3.isEditable()==true) {
 					sql = "update usuario set apellido_2 = ? where username = ?";
@@ -173,6 +175,7 @@ public class Updateperfil {
 					} catch (SQLException e) {
 						e.printStackTrace();
 						JOptionPane.showMessageDialog(null, "Los datos no son validos " +e.getMessage(),"ERROR", JOptionPane.ERROR_MESSAGE);
+						Login.log.log(Level.FINER,"Datos no validos (apellido_2)");
 					}
 				}else if(passwordField.isEditable()==true){
 					sql = "update usuario set contraseña = ? where username = ?";
@@ -191,6 +194,7 @@ public class Updateperfil {
 					} catch (SQLException e) {
 						e.printStackTrace();
 						JOptionPane.showMessageDialog(null, "Los datos no son validos " +e.getMessage(),"ERROR", JOptionPane.ERROR_MESSAGE);
+						Login.log.log(Level.FINER,"Datos no validos (contraseña)");
 					}
 				}else if(textField_4.isEditable()==true&&textField_2.isEditable()==true&&textField_3.isEditable()==true&&passwordField.isEditable()==true) {
 					JOptionPane.showMessageDialog(null, "No has cambiado ningun valor","ERROR",JOptionPane.ERROR_MESSAGE);
@@ -310,32 +314,37 @@ public class Updateperfil {
 				if(textField.getText().isEmpty()) {
 					JOptionPane.showMessageDialog(null, "El usuario no es valdio o es nulo","ERROR",JOptionPane.ERROR_MESSAGE);
 				}else {
-					Conexion conexion = new Conexion();
-					Connection cn = conexion.conectar();
-					String username;
-					username = textField.getText();
-					btnCargarDatosDe.setVisible(false);
-					String sql = "select nombre,apellido_1,apellido_2,contraseña from usuario where username = ?";
-					try{
-						PreparedStatement sentencia = cn.prepareStatement(sql);
-						sentencia.setString(1, username);
-						ResultSet rs = sentencia.executeQuery();
-						textField_4.setText(rs.getString(1));
-						textField_2.setText(rs.getString(2));
-						textField_3.setText(rs.getString(3));
-						passwordField.setText(rs.getString(4));
-						textField.setEditable(false);
-						textField_2.setEditable(false);
-						textField_3.setEditable(false);
-						textField_4.setEditable(false);
-						passwordField.setEditable(false);
-						Conexion.cerrarBD(cn, sentencia);
-						
-					}catch(SQLException e4) {
-						JOptionPane.showMessageDialog(null, "El usuario no es valido","ERROR",JOptionPane.ERROR_MESSAGE);
-						textField.setEditable(false);
-					}
+					cargardatosusuario(btnCargarDatosDe);
 					
+				}
+			}
+
+			private void cargardatosusuario(JButton btnCargarDatosDe) {
+				Conexion conexion = new Conexion();
+				Connection cn = conexion.conectar();
+				String username;
+				username = textField.getText();
+				btnCargarDatosDe.setVisible(false);
+				String sql = "select nombre,apellido_1,apellido_2,contraseña from usuario where username = ?";
+				try{
+					PreparedStatement sentencia = cn.prepareStatement(sql);
+					sentencia.setString(1, username);
+					ResultSet rs = sentencia.executeQuery();
+					textField_4.setText(rs.getString(1));
+					textField_2.setText(rs.getString(2));
+					textField_3.setText(rs.getString(3));
+					passwordField.setText(rs.getString(4));
+					textField.setEditable(false);
+					textField_2.setEditable(false);
+					textField_3.setEditable(false);
+					textField_4.setEditable(false);
+					passwordField.setEditable(false);
+					Conexion.cerrarBD(cn, sentencia);
+					
+				}catch(SQLException e4) {
+					JOptionPane.showMessageDialog(null, "El usuario no es valido","ERROR",JOptionPane.ERROR_MESSAGE);
+					textField.setEditable(true);
+					btnCargarDatosDe.setVisible(true);
 				}
 			}
 		});

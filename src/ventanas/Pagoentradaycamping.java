@@ -156,6 +156,10 @@ public class Pagoentradaycamping {
 		JButton btnNewButton = new JButton("Cargar eventos y campings\r\n");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				cargarEyC(comboBox, comboBox_1);
+			}
+
+			private void cargarEyC(JComboBox comboBox, JComboBox comboBox_1) {
 				Conexion conexion3 = new Conexion();
 				Connection cn3 = conexion3.conectar();
 				String query = "SELECT NOMBRE,CANTIDAD FROM ENTRADAS";
@@ -171,6 +175,7 @@ public class Pagoentradaycamping {
 					rs.close();
 				} catch (SQLException e1) {
 					e1.printStackTrace();
+					Login.log.log(Level.FINER,"Error al cargar datos entradas compraEyC");
 				}
 				try {
 					java.sql.Statement stmt1 = cn3.createStatement();
@@ -182,6 +187,7 @@ public class Pagoentradaycamping {
 					rs1.close();
 				} catch (SQLException e1) {
 					e1.printStackTrace();
+					Login.log.log(Level.FINER,"Error al cargar datos campings compraEyC");
 				}
 			}
 		});
@@ -199,6 +205,7 @@ public class Pagoentradaycamping {
 					}
 					}catch(Exception e5) {
 						JOptionPane.showMessageDialog(null, "Cargar los conciertos y campings primero","ERROR",JOptionPane.ERROR_MESSAGE);
+						Login.log.log(Level.FINER,"cargar primero datos entradas compraEyC");
 					}
 				try {
 					StringTokenizer st1 = new StringTokenizer(comboBox_1.getSelectedItem().toString());
@@ -208,6 +215,7 @@ public class Pagoentradaycamping {
 					}
 					}catch(Exception e5) {
 						JOptionPane.showMessageDialog(null, "Cargar los campings primero","ERROR",JOptionPane.ERROR_MESSAGE);
+						Login.log.log(Level.FINER,"cargar primero datos entradas compraEyC");
 					}
 			
 			}
@@ -466,6 +474,7 @@ public class Pagoentradaycamping {
 						comprarentradasycamping(x);
 						}else {
 							JOptionPane.showMessageDialog(null, "No se ha podidio realizar la compra","ERROR",JOptionPane.ERROR_MESSAGE);
+							Login.log.log(Level.SEVERE,"No se ha podido realizar la compra");
 						}
 					}
 					break;
@@ -477,11 +486,13 @@ public class Pagoentradaycamping {
 				}
 			}catch(NullPointerException e10) {
 				JOptionPane.showMessageDialog(null, "Rellena todos los campos para completar el pago","ERROR",JOptionPane.ERROR_MESSAGE);
+				Login.log.log(Level.FINER,"Rellena los huecos en la compra de EyC");
 			}catch(NumberFormatException e20) {
 				JOptionPane.showMessageDialog(null, "Rellena los huecos con valores validos","ERROR",JOptionPane.ERROR_MESSAGE);
+				Login.log.log(Level.FINER,"Error en el formato de numero en la compra de EyC");
 			}
-			}
-			});
+		}
+	});
 		btnPagar.setBounds(188, 540, 115, 29);
 		frame.getContentPane().add(btnPagar);
 		
@@ -545,6 +556,7 @@ public class Pagoentradaycamping {
 			}
 		}catch (SQLException e1) {
 			e1.printStackTrace();
+			Login.log.log(Level.FINER,"Error en la carga de datos EyC");
 		}
 	}
 	public void comprarcampingsql2() {
@@ -577,9 +589,11 @@ public class Pagoentradaycamping {
 			}
 		}catch (SQLException e1) {
 			e1.printStackTrace();
+			Login.log.log(Level.FINER,"Error en la carga de datos EyC");
 		}
 		}catch(NumberFormatException e20) {
 			JOptionPane.showMessageDialog(null, "Rellena los huecos con valores validos","ERROR",JOptionPane.ERROR_MESSAGE);
+			Login.log.log(Level.FINER,"Error en el formato de numero de entradaEyC");
 		}
 	}
 public void comprarentradasycamping(int x) {
@@ -616,6 +630,7 @@ public void comprarentradasycamping(int x) {
 							archivo.close();	
 						}catch(IOException e6) {
 							e6.printStackTrace();
+							Login.log.log(Level.FINER,"Error en el creador de ficheros entradaEyC");
 						}
 						try{
 							FileWriter archivo = new FileWriter("C:\\Users\\jaime\\eclipse-workspace\\proyecto program 3\\Tickets\\Entrada+camping\\entrada+camping"+dni+".txt", true);
@@ -628,6 +643,7 @@ public void comprarentradasycamping(int x) {
 							archivo.close();	
 						}catch(IOException e6) {
 							e6.printStackTrace();
+							Login.log.log(Level.FINER,"Error en el creador de ficheros entradaEyC");
 						}
 						try{
 							FileWriter archivo = new FileWriter("C:\\Users\\jaime\\eclipse-workspace\\proyecto program 3\\TicketsProperties\\entrada+camping.txt", true);
@@ -640,12 +656,14 @@ public void comprarentradasycamping(int x) {
 							archivo.close();	
 						}catch(IOException e6) {
 							e6.printStackTrace();
+							Login.log.log(Level.FINER,"Error en el creador de ficheros entradaEyC");
 						}
 					x++;
 					comprarentradasycamping(x);
 				}
 		}catch(NumberFormatException e20) {
 			JOptionPane.showMessageDialog(null, "Rellena los huecos con valores validos","ERROR",JOptionPane.ERROR_MESSAGE);
+			Login.log.log(Level.FINER,"Error en el formato de numero de entradaEyC");
 		}
 		}
 }

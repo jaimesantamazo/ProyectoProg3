@@ -4,8 +4,11 @@ import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.Properties;
+import java.util.logging.Level;
 
 import javax.swing.JOptionPane;
+
+import ventanas.Login;
 
 public class propertiesentradaycamping extends Thread{
 	static Properties config = new Properties();
@@ -25,6 +28,7 @@ public class propertiesentradaycamping extends Thread{
             System.out.println(config.getProperty("Extras"));
         } catch(Exception e){
             JOptionPane.showMessageDialog(null, "No has comprado entradas y elcamping, " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+            Login.log.log(Level.SEVERE,"Error al cargar el fichero properties");
         }
     }
     
@@ -34,6 +38,7 @@ public class propertiesentradaycamping extends Thread{
             config.setProperty(property, value);
         } catch(Exception e){
             JOptionPane.showMessageDialog(null, "No has comprado entradas con camping,  " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+            Login.log.log(Level.SEVERE,"Error al cargar el fichero properties");
         }
     }
 

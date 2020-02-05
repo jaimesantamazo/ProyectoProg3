@@ -13,6 +13,7 @@ import java.awt.Font;
 import javax.swing.JButton;
 import java.awt.Color;
 import java.awt.event.ActionListener;
+import java.util.logging.Level;
 import java.awt.event.ActionEvent;
 import javax.swing.JPasswordField;
 
@@ -116,6 +117,7 @@ public class LoginAdmin {
 			
 		}else{
 			JOptionPane.showMessageDialog(frame, "Datos no validos", "error", JOptionPane.ERROR_MESSAGE);
+			Login.log.log(Level.FINER,"Datos no validos");
 		}
 		
 	}

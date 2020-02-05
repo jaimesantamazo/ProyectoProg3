@@ -2,8 +2,11 @@ package gestionBD;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.logging.Level;
 
 import javax.swing.JOptionPane;
+
+import ventanas.Login;
 
 import java.sql.Connection;
 
@@ -18,7 +21,7 @@ public class Conexion {
 			conn = DriverManager.getConnection("jdbc:sqlite:database/bd_pagina");
 			
 		} catch (Exception e) {
-			JOptionPane.showMessageDialog(null, "Error al conectar la base de datos");
+			Login.log.log(Level.SEVERE,"Error al cargar la BD");
 			e.printStackTrace();
 		}
 		return conn;
@@ -30,6 +33,7 @@ public class Conexion {
 		} catch (SQLException e) {
 			lastError = e;
 			e.printStackTrace();
+			Login.log.log(Level.SEVERE,"Error al cargar la BD");
 		}
 	}
 

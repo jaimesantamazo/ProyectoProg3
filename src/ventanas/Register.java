@@ -129,6 +129,10 @@ public class Register {
 		JButton btnNewButton_1 = new JButton("Registrarse\r\n");
 		btnNewButton_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				añadirusuario();
+}
+
+			private void añadirusuario() {
 				Conexion conexion = new Conexion();
 				Connection cn = conexion.conectar();
 				String username;
@@ -193,11 +197,9 @@ public class Register {
 					} catch (SQLException e) {
 						e.printStackTrace();
 						JOptionPane.showMessageDialog(null, "Los datos no son validos" +e.getMessage(),"ERROR", JOptionPane.ERROR_MESSAGE);
+						Login.log.log(Level.FINER,"Error al crear usuario");
 					}
 				}
-				
-				
-				
 			}
 			}});
 		btnNewButton_1.setForeground(Color.BLACK);

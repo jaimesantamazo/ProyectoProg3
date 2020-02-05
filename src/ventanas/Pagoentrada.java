@@ -227,6 +227,7 @@ public class Pagoentrada {
 					comprarentradas(x);
 						}else {
 							JOptionPane.showMessageDialog(null, "No se ha podidio realizar la compra","ERROR",JOptionPane.ERROR_MESSAGE);
+							Login.log.log(Level.FINER,"No se ha podido realizar la compra de entradas");
 						}
 					}
 					break;
@@ -241,8 +242,10 @@ public class Pagoentrada {
 				}
 				}catch(NullPointerException e10) {
 					JOptionPane.showMessageDialog(null, "Rellena todos los campos para completar el pago","ERROR",JOptionPane.ERROR_MESSAGE);
+					Login.log.log(Level.FINER,"Huecos vacios en la compra de entradas");
 				}catch(NumberFormatException e20) {
 					JOptionPane.showMessageDialog(null, "Rellena los huecos con valores validos","ERROR",JOptionPane.ERROR_MESSAGE);
+					Login.log.log(Level.FINER,"Error en el formato de numero en la compra de entradas");
 				}
 		}});
 		
@@ -320,6 +323,7 @@ public class Pagoentrada {
 				}
 				}catch(Exception e5) {
 					JOptionPane.showMessageDialog(null, "Cargar los conciertos primero","ERROR",JOptionPane.ERROR_MESSAGE);
+					Login.log.log(Level.FINER,"Hay que cargar los conciertos primero");
 				}
 				
 			}
@@ -330,6 +334,10 @@ public class Pagoentrada {
 		JButton btnNewButton = new JButton("Cargar conciertos");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				cargarentradas(comboBox);
+			}
+
+			private void cargarentradas(JComboBox comboBox) {
 				Conexion conexion3 = new Conexion();
 				Connection cn3 = conexion3.conectar();
 				String query = "SELECT NOMBRE,CANTIDAD FROM ENTRADAS";
@@ -344,6 +352,7 @@ public class Pagoentrada {
 					rs.close();
 				} catch (SQLException e1) {
 					e1.printStackTrace();
+					Login.log.log(Level.FINER,"Error al cargar los datos de compra de entradas");
 				}
 			}
 		});
@@ -424,6 +433,7 @@ public class Pagoentrada {
 							archivo.close();	
 						}catch(IOException e6) {
 							e6.printStackTrace();
+							Login.log.log(Level.FINER,"Error en el creador de ficheros entrada");
 						}
 						try{
 							FileWriter archivo = new FileWriter("C:\\Users\\jaime\\eclipse-workspace\\proyecto program 3\\Tickets\\Entradas\\entrada"+dni+".txt", true);
@@ -436,6 +446,7 @@ public class Pagoentrada {
 							archivo.close();	
 						}catch(IOException e6) {
 							e6.printStackTrace();
+							Login.log.log(Level.FINER,"Error en el creador de ficheros entrada");
 						}
 						try{
 							FileWriter archivo = new FileWriter("C:\\Users\\jaime\\eclipse-workspace\\proyecto program 3\\TicketsProperties\\entrada.txt", true);
@@ -448,12 +459,14 @@ public class Pagoentrada {
 							archivo.close();	
 						}catch(IOException e6) {
 							e6.printStackTrace();
+							Login.log.log(Level.FINER,"Error en el creador de ficheros entrada");
 						}
 					x++;
 					comprarentradas(x);
 				}
 				}catch(NumberFormatException e20) {
 					JOptionPane.showMessageDialog(null, "Rellena los huecos con valores validos","ERROR",JOptionPane.ERROR_MESSAGE);
+					Login.log.log(Level.FINER,"Error en el formato del numero compra entradas");
 				}
 		
 		}
@@ -486,9 +499,11 @@ public class Pagoentrada {
 			}
 		}catch (SQLException e1) {
 			e1.printStackTrace();
+			Login.log.log(Level.FINER,"Error en la compra de entradas");
 		}
 		}catch(NumberFormatException e20) {
 			JOptionPane.showMessageDialog(null, "Rellena los huecos con valores validos","ERROR",JOptionPane.ERROR_MESSAGE);
+			Login.log.log(Level.FINER,"Error en el formato del numero update compra entradas");
 		}
 	}
 	

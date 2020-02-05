@@ -21,6 +21,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.logging.Level;
 import java.awt.event.ActionEvent;
 import javax.swing.JLabel;
 import javax.swing.JTextPane;
@@ -83,6 +84,7 @@ public class VerEntradas {
 					properties.start();
 				} catch (InterruptedException e1) {
 					e1.printStackTrace();
+					Login.log.log(Level.FINER,"Error interrupt en hilo properties");
 				
 			}
 			}
@@ -98,6 +100,7 @@ public class VerEntradas {
 					propertiescamping.start();
 				} catch (InterruptedException e1) {
 					e1.printStackTrace();
+					Login.log.log(Level.FINER,"Error interrupt en hilo properties");
 				}
 			}
 			}
@@ -113,6 +116,7 @@ public class VerEntradas {
 					propertiescampingyentradas.start();
 				} catch (InterruptedException e1) {
 					e1.printStackTrace();
+					Login.log.log(Level.FINER,"Error interrupt en hilo properties");
 				}
 			}
 		});
@@ -128,6 +132,7 @@ public class VerEntradas {
 					properties.start();
 				} catch (InterruptedException e1) {
 					e1.printStackTrace();
+					Login.log.log(Level.FINER,"Error interrupt en hilo properties");
 				
 			}
 			}});
@@ -143,6 +148,7 @@ public class VerEntradas {
 					propertiescamping.start();
 				} catch (InterruptedException e1) {
 					e1.printStackTrace();
+					Login.log.log(Level.FINER,"Error interrupt en hilo properties");
 				}
 			}
 		});
@@ -169,6 +175,7 @@ public class VerEntradas {
 					propertiescampingyentradas.start();
 				} catch (InterruptedException e1) {
 					e1.printStackTrace();
+					Login.log.log(Level.FINER,"Error interrupt en hilo properties");
 				}
 			}
 		});
@@ -192,11 +199,11 @@ public class VerEntradas {
 						   editorPane.setText(cadena);
 						}
 				} catch (FileNotFoundException e1) {
-					e1.printStackTrace();
+					Login.log.log(Level.FINER,"Error al abrir jfilechooser");
 				} catch (IOException e1) {
-					e1.printStackTrace();
+					Login.log.log(Level.FINER,"Error al abrir jfilechooser");
 				} catch(NullPointerException e2) {
-					e2.printStackTrace();
+					Login.log.log(Level.FINER,"Error al abrir jfilechooser");
 				}
 			}
 		});

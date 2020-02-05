@@ -92,6 +92,10 @@ public class Gestion {
 		JButton btnAadirEvento = new JButton("A\u00F1adir evento");
 		btnAadirEvento.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				añadirentradas(listmodel);
+			}
+
+			private void añadirentradas(DefaultListModel<String> listmodel) {
 				Conexion conexion1 = new Conexion();
 				Connection cn1 = conexion1.conectar();
 				String codigo;
@@ -138,14 +142,12 @@ public class Gestion {
 							}
 							Login.log.log(Level.FINER,"Añadiendo eventos: " + nombre);
 						}
-						
 					} catch (SQLException e) {
 						e.printStackTrace();
 						JOptionPane.showMessageDialog(null, "Los datos no son validos"+e.getMessage(), "ERROR", JOptionPane.ERROR_MESSAGE);
+						Login.log.log(Level.FINER,"Error al meter los datos");
 					}
 				}
-				
-				
 			}
 		});
 		btnAadirEvento.setBounds(13, 437, 120, 29);
@@ -154,6 +156,10 @@ public class Gestion {
 		JButton btnEliminarEvento = new JButton("Eliminar evento");
 		btnEliminarEvento.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				eliminarentradas(listmodel, list);
+			}
+
+			private void eliminarentradas(DefaultListModel<String> listmodel, JList<String> list) {
 				Conexion conexion2 = new Conexion();
 				Connection cn2 = conexion2.conectar();
 				String codigo;
@@ -191,10 +197,10 @@ public class Gestion {
 						}
 						Login.log.log(Level.FINER,"Eliminar eventos: " + nombre);
 					}
-					
 				} catch (SQLException e) {
 					e.printStackTrace();
 					JOptionPane.showMessageDialog(null, "No has podido eliminar el evento"+e.getMessage(),"ERROR",JOptionPane.ERROR_MESSAGE);
+					Login.log.log(Level.FINER,"Error al eliminar los datos");
 				}
 			}
 		});
@@ -337,6 +343,10 @@ public class Gestion {
 		btnCargarDatos.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				listmodel.clear();
+				cargarentradas(listmodel, cn4);
+			}
+			
+			private void cargarentradas(DefaultListModel<String> listmodel, Connection cn4) {
 				String query = "SELECT CODIGO,NOMBRE,PRECIO,FECHA_INI,FECHA_FIN,CANTIDAD FROM ENTRADAS";
 				try {
 					java.sql.Statement stmt = cn4.createStatement();
@@ -348,6 +358,7 @@ public class Gestion {
 					rs.close();
 				} catch (SQLException e1) {
 					e1.printStackTrace();
+					Login.log.log(Level.FINER,"Error al cargar los datos");
 				}
 			}
 		});

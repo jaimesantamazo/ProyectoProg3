@@ -152,6 +152,7 @@ public class Updateeventos {
 					} catch (SQLException e) {
 						e.printStackTrace();
 						JOptionPane.showMessageDialog(null, "Los datos no son validos " +e.getMessage(),"ERROR", JOptionPane.ERROR_MESSAGE);
+						Login.log.log(Level.FINER,"Datos no validos (nombre)");
 					}
 				}else if(textField_2.isEditable()==true) {
 					sql = "update entradas set precio = ? where codigo = ?";
@@ -170,6 +171,7 @@ public class Updateeventos {
 					} catch (SQLException e) {
 						e.printStackTrace();
 						JOptionPane.showMessageDialog(null, "Los datos no son validos " +e.getMessage(),"ERROR", JOptionPane.ERROR_MESSAGE);
+						Login.log.log(Level.FINER,"Datos no validos (precio)");
 					}
 				}else if(textField_3.isEditable()==true) {
 					sql = "update entradas set fecha_ini = ? where codigo = ?";
@@ -188,6 +190,7 @@ public class Updateeventos {
 					} catch (SQLException e) {
 						e.printStackTrace();
 						JOptionPane.showMessageDialog(null, "Los datos no son validos " +e.getMessage(),"ERROR", JOptionPane.ERROR_MESSAGE);
+						Login.log.log(Level.FINER,"Datos no validos (fecha_ini)");
 					}
 				}else if(textField_5.isEditable()==true){
 					sql = "update entradas set fecha_fin = ? where codigo = ?";
@@ -206,6 +209,7 @@ public class Updateeventos {
 					} catch (SQLException e) {
 						e.printStackTrace();
 						JOptionPane.showMessageDialog(null, "Los datos no son validos " +e.getMessage(),"ERROR", JOptionPane.ERROR_MESSAGE);
+						Login.log.log(Level.FINER,"Datos no validos (fecha_fin)");
 					}
 				}else if(textField_1.isEditable()==true) {
 					sql = "update entradas set cantidad = ? where codigo = ?";
@@ -224,6 +228,7 @@ public class Updateeventos {
 					} catch (SQLException e) {
 						e.printStackTrace();
 						JOptionPane.showMessageDialog(null, "Los datos no son validos " +e.getMessage(),"ERROR", JOptionPane.ERROR_MESSAGE);
+						Login.log.log(Level.FINER,"Datos no validos (cantidad)");
 					}
 				}else if(textField_4.isEditable()==true&&textField_2.isEditable()==true&&textField_3.isEditable()==true&&textField_5.isEditable()==true&&textField_1.isEditable()==true) {
 					JOptionPane.showMessageDialog(null, "No has cambiado ningun valor","ERROR",JOptionPane.ERROR_MESSAGE);
@@ -322,35 +327,40 @@ public class Updateeventos {
 				if(textField.getText().isEmpty()) {
 					JOptionPane.showMessageDialog(null, "El codigo no es valdio o es nulo","ERROR",JOptionPane.ERROR_MESSAGE);
 				}else {
-					Conexion conexion = new Conexion();
-					Connection cn = conexion.conectar();
-					String codigo;
-					codigo = textField.getText();
-					btnCargarDatosDe.setVisible(false);
-					String sql = "select nombre,precio,fecha_ini,fecha_fin,cantidad from entradas where codigo = ?";
-					try{
-						PreparedStatement sentencia = cn.prepareStatement(sql);
-						sentencia.setString(1, codigo);
-						ResultSet rs = sentencia.executeQuery();
-						textField_4.setText(rs.getString(1));
-						textField_2.setText(rs.getString(2));
-						textField_3.setText(rs.getString(3));
-						textField_5.setText(rs.getString(4));
-						textField_1.setText(rs.getString(5));
-						
-						textField.setEditable(false);
-						textField_2.setEditable(false);
-						textField_3.setEditable(false);
-						textField_4.setEditable(false);
-						textField_5.setEditable(false);
-						textField_1.setEditable(false);
-						Conexion.cerrarBD(cn, sentencia);
-						
-					}catch(SQLException e4) {
-						JOptionPane.showMessageDialog(null, "El codigo no es valido","ERROR",JOptionPane.ERROR_MESSAGE);
-						textField.setEditable(false);
-					}
+					cargardatosentradas(btnCargarDatosDe);
 					
+				}
+			}
+
+			private void cargardatosentradas(JButton btnCargarDatosDe) {
+				Conexion conexion = new Conexion();
+				Connection cn = conexion.conectar();
+				String codigo;
+				codigo = textField.getText();
+				btnCargarDatosDe.setVisible(false);
+				String sql = "select nombre,precio,fecha_ini,fecha_fin,cantidad from entradas where codigo = ?";
+				try{
+					PreparedStatement sentencia = cn.prepareStatement(sql);
+					sentencia.setString(1, codigo);
+					ResultSet rs = sentencia.executeQuery();
+					textField_4.setText(rs.getString(1));
+					textField_2.setText(rs.getString(2));
+					textField_3.setText(rs.getString(3));
+					textField_5.setText(rs.getString(4));
+					textField_1.setText(rs.getString(5));
+					
+					textField.setEditable(false);
+					textField_2.setEditable(false);
+					textField_3.setEditable(false);
+					textField_4.setEditable(false);
+					textField_5.setEditable(false);
+					textField_1.setEditable(false);
+					Conexion.cerrarBD(cn, sentencia);
+					
+				}catch(SQLException e4) {
+					JOptionPane.showMessageDialog(null, "El codigo no es valido","ERROR",JOptionPane.ERROR_MESSAGE);
+					textField.setEditable(true);
+					btnCargarDatosDe.setVisible(true);
 				}
 			}
 		});
@@ -386,6 +396,10 @@ public class Updateeventos {
 			@Override
 			public void windowOpened(WindowEvent e) {
 				listmodel.clear();
+				cargarjlistentradas(listmodel, cn4);
+			}
+
+			private void cargarjlistentradas(DefaultListModel<String> listmodel, Connection cn4) {
 				String query = "SELECT CODIGO,NOMBRE FROM ENTRADAS";
 				try {
 					java.sql.Statement stmt = cn4.createStatement();
@@ -397,6 +411,7 @@ public class Updateeventos {
 					rs.close();
 				} catch (SQLException e1) {
 					e1.printStackTrace();
+					Login.log.log(Level.FINER,"Error al cargar datos entrada jlist update");
 				}
 			}
 			
