@@ -142,6 +142,7 @@ public class Gestion {
 							}
 							Login.log.log(Level.FINER,"Añadiendo eventos: " + nombre);
 						}
+						Conexion.cerrarBD(cn1, pst1);
 					} catch (SQLException e) {
 						e.printStackTrace();
 						JOptionPane.showMessageDialog(null, "Los datos no son validos"+e.getMessage(), "ERROR", JOptionPane.ERROR_MESSAGE);
@@ -197,6 +198,7 @@ public class Gestion {
 						}
 						Login.log.log(Level.FINER,"Eliminar eventos: " + nombre);
 					}
+					Conexion.cerrarBD(cn2, pst2);
 				} catch (SQLException e) {
 					e.printStackTrace();
 					JOptionPane.showMessageDialog(null, "No has podido eliminar el evento"+e.getMessage(),"ERROR",JOptionPane.ERROR_MESSAGE);

@@ -587,6 +587,7 @@ public class Pagoentradaycamping {
 			if(n>0) {
 				Login.log.log(Level.FINER,"Campings comprado/os: "+valor1 + nombre1);
 			}
+			Conexion.cerrarBD(cn5, pst2);
 		}catch (SQLException e1) {
 			e1.printStackTrace();
 			Login.log.log(Level.FINER,"Error en la carga de datos EyC");

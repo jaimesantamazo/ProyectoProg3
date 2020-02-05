@@ -113,6 +113,7 @@ public class Recordarcontraseña {
 					ResultSet rs = sentencia.executeQuery();
 					contraseña = rs.getString(1);
 					textField_1.setText(contraseña);
+					rs.close();
 				}catch(SQLException e4) {
 					JOptionPane.showConfirmDialog(null, "El usuario no es valido","ERROR",JOptionPane.ERROR_MESSAGE);
 					Login.log.log(Level.FINER,"Error al recordar contraseña");

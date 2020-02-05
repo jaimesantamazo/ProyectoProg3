@@ -134,6 +134,7 @@ public class Updateperfil {
 							frame1.dispose();
 							new Login();
 						}
+						Conexion.cerrarBD(cn, pst);
 					} catch (SQLException e) {
 						e.printStackTrace();
 						JOptionPane.showMessageDialog(null, "Los datos no son validos " +e.getMessage(),"ERROR", JOptionPane.ERROR_MESSAGE);
@@ -153,6 +154,7 @@ public class Updateperfil {
 							frame1.dispose();
 							new Login();
 						}
+						Conexion.cerrarBD(cn, pst1);
 					} catch (SQLException e) {
 						e.printStackTrace();
 						JOptionPane.showMessageDialog(null, "Los datos no son validos " +e.getMessage(),"ERROR", JOptionPane.ERROR_MESSAGE);
@@ -172,6 +174,7 @@ public class Updateperfil {
 							frame1.dispose();
 							new Login();
 						}
+						Conexion.cerrarBD(cn, pst2);
 					} catch (SQLException e) {
 						e.printStackTrace();
 						JOptionPane.showMessageDialog(null, "Los datos no son validos " +e.getMessage(),"ERROR", JOptionPane.ERROR_MESSAGE);
@@ -191,6 +194,7 @@ public class Updateperfil {
 							frame1.dispose();
 							new Login();
 						}
+						Conexion.cerrarBD(cn, pst3);
 					} catch (SQLException e) {
 						e.printStackTrace();
 						JOptionPane.showMessageDialog(null, "Los datos no son validos " +e.getMessage(),"ERROR", JOptionPane.ERROR_MESSAGE);

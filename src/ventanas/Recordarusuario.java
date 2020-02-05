@@ -112,6 +112,7 @@ public class Recordarusuario {
 					ResultSet rs = sentencia.executeQuery();
 					username = rs.getString(1);
 					textField_1.setText(username);
+					rs.close();
 				}catch(SQLException e4) {
 					JOptionPane.showConfirmDialog(null, "El email no es valido","ERROR",JOptionPane.ERROR_MESSAGE);
 					Login.log.log(Level.FINER,"Error al recordar usuario");

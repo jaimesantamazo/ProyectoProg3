@@ -497,6 +497,7 @@ public class Pagoentrada {
 			if(n>0) {
 				Login.log.log(Level.FINER,"Entrada comprada/as: "+valor1 + nombre);
 			}
+			Conexion.cerrarBD(cn5, pst2);
 		}catch (SQLException e1) {
 			e1.printStackTrace();
 			Login.log.log(Level.FINER,"Error en la compra de entradas");

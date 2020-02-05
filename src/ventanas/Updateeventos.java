@@ -149,6 +149,7 @@ public class Updateeventos {
 							frame1.dispose();
 							new Gestion();
 						}
+						Conexion.cerrarBD(cn, pst);
 					} catch (SQLException e) {
 						e.printStackTrace();
 						JOptionPane.showMessageDialog(null, "Los datos no son validos " +e.getMessage(),"ERROR", JOptionPane.ERROR_MESSAGE);
@@ -168,6 +169,7 @@ public class Updateeventos {
 							frame1.dispose();
 							new Gestion();
 						}
+						Conexion.cerrarBD(cn, pst);
 					} catch (SQLException e) {
 						e.printStackTrace();
 						JOptionPane.showMessageDialog(null, "Los datos no son validos " +e.getMessage(),"ERROR", JOptionPane.ERROR_MESSAGE);
@@ -187,6 +189,7 @@ public class Updateeventos {
 							frame1.dispose();
 							new Gestion();
 						}
+						Conexion.cerrarBD(cn, pst);
 					} catch (SQLException e) {
 						e.printStackTrace();
 						JOptionPane.showMessageDialog(null, "Los datos no son validos " +e.getMessage(),"ERROR", JOptionPane.ERROR_MESSAGE);
@@ -206,6 +209,7 @@ public class Updateeventos {
 							frame1.dispose();
 							new Gestion();
 						}
+						Conexion.cerrarBD(cn, pst);
 					} catch (SQLException e) {
 						e.printStackTrace();
 						JOptionPane.showMessageDialog(null, "Los datos no son validos " +e.getMessage(),"ERROR", JOptionPane.ERROR_MESSAGE);
@@ -225,6 +229,7 @@ public class Updateeventos {
 							frame1.dispose();
 							new Gestion();
 						}
+						Conexion.cerrarBD(cn, pst);
 					} catch (SQLException e) {
 						e.printStackTrace();
 						JOptionPane.showMessageDialog(null, "Los datos no son validos " +e.getMessage(),"ERROR", JOptionPane.ERROR_MESSAGE);
